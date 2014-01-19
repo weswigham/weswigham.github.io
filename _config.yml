@@ -1,0 +1,18 @@
+# Dependencies
+markdown:         redcarpet
+pygments:         true
+
+# Permalinks
+permalink:        pretty
+
+# Setup
+title:            Ham
+tagline:          'A pinch of paradise with a dash of salt'
+description:      'A personal blog and experimentation platform. Published by <a href="https://github.com/weswigham">weswigham</a>.'
+url:              http://ham.io
+
+author:
+  name:           'Wesley Wigham'
+  url:            http://ham.io
+
+paginate:         5
