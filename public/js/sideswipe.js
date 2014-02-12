@@ -1,17 +1,20 @@
+/* jshint browser: true, jquery: true */
+/* global Hammer: false */
 
 (function() {
-
+  'use strict';
+  
   var tend_evt = "transitionend webkitTransitionEnd oTransitionEnd msTransitionEnd";
 
   function transitionTo(selector, url, dir, speed, easing) {
-    var speed = speed || 800;
-    var easing = easing || "ease-in-out 0s";
-    var dir = dir==="right" ? "right" : "left";
+    speed = speed || 800;
+    easing = easing || "ease-in-out 0s";
+    dir = dir==="right" ? "right" : "left";
     
     $.get(url, function(data) {
     
       var xmldoc = $.parseHTML(data);
-      var title = $('<div />').html(unescape(data.match(/<title>([\s\S]*?)<\/title>/)[1].trim())).text();
+      var title = $('<div />').html(decodeURIComponent(data.match(/<title>([\s\S]*?)<\/title>/)[1].trim())).text();
       document.title = title;
       
       var element = $(selector);
@@ -59,7 +62,7 @@
         element.css("width", original_width);
         copy.remove();
         cleaned = true;
-      }
+      };
       
       element.one(tend_evt, cleanup);
       
@@ -90,17 +93,17 @@
       onstarttransition: function() {},
       onleftbound: function() {},
       onrightbound: function() {},
-    }
+    };
 
     var element = document.querySelector(selector);
     var pos = linklist.indexOf(window.location.pathname);
     
     history.pushState({contentarea: selector, link: linklist[pos]}, document.title, window.location.pathname);
     
-    Hammer(element, { 
+    (new Hammer.Instance(element, { 
       prevent_default: true,
       no_mouseevents: true
-    }).on("swipeleft swiperight", function(ev) {
+    })).on("swipeleft swiperight", function(ev) {
     
       if (!ev.gesture) { return; }
       
