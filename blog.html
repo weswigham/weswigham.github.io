@@ -4,10 +4,17 @@ layout: default
 
 <div class="posts">
   {% for post in site.posts %}
-    {% if post.layout == "status" %}
+    {% case post.layout %}
+    {% when "status" %}
       <div class="status">
         <h1><span class="leftq">“</span>{{post.content}}<span class="rightq">”</span></h1>
-        <span class="post-date">{{ post.date | date_to_string }}</span>
+        <a href="{{ post.url }}"><span class="post-date">{{ post.date | date_to_string }}</span></a>
+      </div>
+    {% when "image" %}
+      <div class="slide">
+        <img src="{{post.source}}" title="{{post.title}}">
+        {{post.content}}
+        <a href="{{ post.url }}"><span class="post-date">{{ post.date | date_to_string }}</span></a>
       </div>
     {% else %}
       <div class="post">
@@ -23,6 +30,6 @@ layout: default
 
 
       </div>
-    {% endif %}
+    {% endcase %}
   {% endfor %}
 </div>

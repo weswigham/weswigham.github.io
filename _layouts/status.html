@@ -3,5 +3,6 @@ layout: default
 ---
 
 <div class="status">
-  <span class="leftq">"</span><h1>{{content}}</h1><span class="rightq">"</span>
+  <h1><span class="leftq">“</span>{{content}}<span class="rightq">”</span></h1>
+  <span class="post-date">{{ page.date | date_to_string }}</span>
 </div>
