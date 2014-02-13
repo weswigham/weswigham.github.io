@@ -2,3 +2,41 @@
 .content small {
   color: #9b9b9b;
 }
+
+.status h1 {
+  font-size: 4em;
+  position: relative;
+  text-align: center;
+}
+
+.status .leftq {
+  font-size: 6em;
+  transform: rotate(30deg);
+  display: inline-block;
+  position: absolute;
+  margin-top: -0.4em;
+  margin-left: -0.45em;
+  top: 0;
+  left: 0;
+  color: rgba(172, 65, 66, 0.8);
+  z-index: 100;
+}
+
+.status .rightq {
+  font-size: 6em;
+  transform: scaleX(-1) rotate(150deg);
+  display: inline-block;
+  position: absolute;
+  margin-bottom: -0.4em;
+  margin-right: -0.25em;
+  bottom: 0;
+  right: 0;
+  color: rgba(172, 65, 66, 0.8);
+  z-index: -100;
+  
+}
+
+.status .post-date {
+  margin-top: 4em;
+  text-align: right;
+}
