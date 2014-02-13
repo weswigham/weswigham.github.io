@@ -2,6 +2,8 @@
 markdown:         redcarpet
 pygments:         true
 
+future:           true
+
 # Permalinks
 permalink:        pretty
 
