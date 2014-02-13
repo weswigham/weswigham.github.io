@@ -88,7 +88,9 @@
   }
   
   function activate(selector, linklist) {
-  
+    var curpage = linklist.indexOf(window.location.pathname);
+    if (curpage<0) { return; } //we're apparently not on a path we're supposed to be, ignore the request
+    
     var returns = {
       onstarttransition: function() {},
       onleftbound: function() {},
