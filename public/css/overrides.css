@@ -66,3 +66,31 @@
 .right {
   float: right;
 }
+
+.pagearrow {
+  position: fixed;
+  color: #9b9b9b;
+  bottom: 50%;
+  margin-top: auto;
+  height: 0;
+  top: 50%;
+  width: 1em;
+  transition: color 0.1s ease-in-out 0.05s;
+}
+
+#sidebar-checkbox:checked ~ .leftarrow {
+  left: 14rem;
+}
+
+.pagearrow:hover {
+  color: rgba(172, 65, 66, 0.8);
+}
+
+.leftarrow {
+  left: 0em;
+  transition: left 0.3s ease-in-out;
+}
+
+.rightarrow {
+  right: 0em;
+}

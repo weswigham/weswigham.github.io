@@ -1,5 +1,5 @@
 /* jshint browser: true, jquery: true */
-/* global sideswipe: false */
+/* global Sideswipe: false */
 
 //http://stackoverflow.com/questions/7690784/how-to-get-absolute-path-from-a-relative-url-with-no-outside-info
 function qualifyURL( url ){
@@ -18,15 +18,15 @@ function shareify() {
       url: url
     });
   });
-};
+}
 
 $(document).ready(function () {
   'use strict';
   
   shareify();
   
-  var Swipe = sideswipe(".content", ["/", "/blog/", "/about/"]);
-  Swipe.onStartTransition = function(selector, url, direction, duration) {
+  var swipe = Sideswipe(".content", ["/", "/blog/", "/about/"]);
+  swipe.onStartTransition = function(selector, url, direction, duration) {
     $(".sidebar-nav-item").removeClass("active");
     $(".sidebar-nav-item").filter(function() {
       return ($(this).attr("href") === url);
@@ -37,15 +37,26 @@ $(document).ready(function () {
     }
   };
 
-  Swipe.onEndTransition = function() {
+  swipe.onEndTransition = function() {
     shareify();
-  }
+  };
   
-  Swipe.onLeftBound = function() {
+  swipe.onLeftBound = function() {
     if ((!$("#sidebar-checkbox").prop("checked")) && ($("body").width()>=600)) { //only expand 'sidebar' on medium/large displays
       $("#sidebar-checkbox").prop("checked", "checked");
     }
   };
+  
+  $("body").append("<div class='leftarrow pagearrow'>L</div>");
+  $("body").append("<div class='rightarrow pagearrow'>R</div>");
+  
+  $(".leftarrow").on('click', function() {
+    swipe.right();
+  });
+  
+  $(".rightarrow").on('click', function() {
+    swipe.left();
+  });
   
 });
 

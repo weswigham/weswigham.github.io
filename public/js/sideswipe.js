@@ -64,7 +64,7 @@
         cleaned = true;
         if (onend) {
           onend();
-        };
+        }
       };
       
       element.one(tend_evt, cleanup);
@@ -99,6 +99,31 @@
       onEndTransition: function() {},
       onLeftBound: function() {},
       onRightBound: function() {},
+      left: function(duration) {
+
+        var pos = linklist.indexOf(window.location.pathname);
+        if (pos<0) { return; } //we're apparently not on a path we're supposed to be
+        if (pos===(linklist.length-1)) { //On the boundary already. Do a bounce animation? Expand a sidebar?
+                returns.onRightBound();
+                return;
+        }
+          
+        returns.onStartTransition(selector, linklist[pos+1], "left", duration);
+        transitionTo(selector, linklist[pos+1], "left", duration, null, returns.onEndTransition);
+        history.pushState({contentarea: selector, link: linklist[pos+1], dir: "left"}, "Swipeleft page", linklist[pos+1]);
+      },
+      right: function(duration) {
+        var pos = linklist.indexOf(window.location.pathname);
+        if (pos<0) { return; } //we're apparently not on a path we're supposed to be
+        if (pos===0) { //On the boundary already. Do a bounce animation? Expand a sidebar?
+          returns.onLeftBound();
+          return;
+        }
+        
+        returns.onStartTransition(selector, linklist[pos-1], "right", duration);
+        transitionTo(selector, linklist[pos-1], "right", duration, null, returns.onEndTransition);
+        history.pushState({contentarea: selector, link: linklist[pos-1], dir: "right"}, "Swiperight page", linklist[pos-1]);
+      }
     };
 
     var element = document.querySelector(selector);
@@ -119,21 +144,9 @@
       var pos = linklist.indexOf(window.location.pathname);
       if (pos<0) { return; } //we're apparently not on a path we're supposed to be
       if (ev.type === "swipeleft") {
-        if (pos===(linklist.length-1)) { //On the boundary already. Do a bounce animation? Expand a sidebar?
-          returns.onRightBound();
-        } else { //Push state and animate to new page
-          returns.onStartTransition(selector, linklist[pos+1], "left", duration);
-          transitionTo(selector, linklist[pos+1], "left", duration, null, returns.onEndTransition);
-          history.pushState({contentarea: selector, link: linklist[pos+1], dir: "left"}, "Swipeleft page", linklist[pos+1]);
-        }
+        returns.left(duration);
       } else { //swiperight
-        if (pos===0) { //On the boundary already. Do a bounce animation? Expand a sidebar?
-          returns.onLeftBound();
-        } else { //Push state and animate to new page
-          returns.onStartTransition(selector, linklist[pos-1], "right", duration);
-          transitionTo(selector, linklist[pos-1], "right", duration, null, returns.onEndTransition);
-          history.pushState({contentarea: selector, link: linklist[pos-1], dir: "right"}, "Swiperight page", linklist[pos-1]);
-        }
+        returns.right(duration);
       }
     });
     
@@ -145,6 +158,6 @@
     return returns;
   }
     
-  window.sideswipe = activate;
+  window.Sideswipe = activate;
 
 })(this);
