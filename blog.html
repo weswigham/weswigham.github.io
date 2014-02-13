@@ -8,13 +8,19 @@ layout: default
     {% when "status" %}
       <div class="status">
         <h1><span class="leftq">“</span>{{post.content}}<span class="rightq">”</span></h1>
-        <a href="{{ post.url }}"><span class="post-date">{{ post.date | date_to_string }}</span></a>
+        <div class='post-footer'>
+          <div class='left'><div class='share-link' data-link="{{post.url}}"></div></div>
+          <a href="{{ post.url }}"><span class="post-date">{{ post.date | date_to_string }}</span></a>
+        </div>
       </div>
     {% when "image" %}
       <div class="slide">
         <img src="{{post.source}}" title="{{post.title}}">
         {{post.content}}
-        <a href="{{ post.url }}"><span class="post-date">{{ post.date | date_to_string }}</span></a>
+        <div class='post-footer'>
+          <div class='left'><div class='share-link' data-link="{{post.url}}"></div></div>
+          <a href="{{ post.url }}"><span class="post-date">{{ post.date | date_to_string }}</span></a>
+        </div>
       </div>
     {% else %}
       <div class="post">
@@ -27,9 +33,11 @@ layout: default
         <span class="post-date">{{ post.date | date_to_string }}</span>
 
         {{ post.content }}
-
-
+        <div class='post-footer'>
+          <div class='share-link' data-link="{{post.url}}"></div>
+        </div>
       </div>
     {% endcase %}
+      <br>
   {% endfor %}
 </div>

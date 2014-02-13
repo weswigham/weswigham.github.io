@@ -1,6 +1,6 @@
 ---
 layout: page
-title: 
+title: About the Author
 ---
 
 <img class="mugshot" src="/public/img/stylized.png" title="Low Quality Face">

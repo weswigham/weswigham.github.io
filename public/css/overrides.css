@@ -47,6 +47,7 @@
 }
 
 .slide .post-date {
+  margin-top: 0.5em;
   text-align: right;
 }
 
@@ -56,4 +57,12 @@
   min-width: 290px;
   height: auto;
   margin-right: 1em;
+}
+
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
 }

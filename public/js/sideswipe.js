@@ -6,7 +6,7 @@
   
   var tend_evt = "transitionend webkitTransitionEnd oTransitionEnd msTransitionEnd";
 
-  function transitionTo(selector, url, dir, speed, easing) {
+  function transitionTo(selector, url, dir, speed, easing, onend) {
     speed = speed || 800;
     easing = easing || "ease-in-out 0s";
     dir = dir==="right" ? "right" : "left";
@@ -62,6 +62,9 @@
         element.css("width", original_width);
         copy.remove();
         cleaned = true;
+        if (onend) {
+          onend();
+        };
       };
       
       element.one(tend_evt, cleanup);
@@ -92,9 +95,10 @@
     if (curpage<0) { return; } //we're apparently not on a path we're supposed to be, ignore the request
     
     var returns = {
-      onstarttransition: function() {},
-      onleftbound: function() {},
-      onrightbound: function() {},
+      onStartTransition: function() {},
+      onEndTransition: function() {},
+      onLeftBound: function() {},
+      onRightBound: function() {},
     };
 
     var element = document.querySelector(selector);
@@ -116,26 +120,26 @@
       if (pos<0) { return; } //we're apparently not on a path we're supposed to be
       if (ev.type === "swipeleft") {
         if (pos===(linklist.length-1)) { //On the boundary already. Do a bounce animation? Expand a sidebar?
-          returns.onrightbound();
+          returns.onRightBound();
         } else { //Push state and animate to new page
-          returns.onstarttransition(selector, linklist[pos+1], "left", duration);
-          transitionTo(selector, linklist[pos+1], "left", duration);
+          returns.onStartTransition(selector, linklist[pos+1], "left", duration);
+          transitionTo(selector, linklist[pos+1], "left", duration, null, returns.onEndTransition);
           history.pushState({contentarea: selector, link: linklist[pos+1], dir: "left"}, "Swipeleft page", linklist[pos+1]);
         }
       } else { //swiperight
         if (pos===0) { //On the boundary already. Do a bounce animation? Expand a sidebar?
-          returns.onleftbound();
+          returns.onLeftBound();
         } else { //Push state and animate to new page
-          returns.onstarttransition(selector, linklist[pos-1], "right", duration);
-          transitionTo(selector, linklist[pos-1], "right", duration);
+          returns.onStartTransition(selector, linklist[pos-1], "right", duration);
+          transitionTo(selector, linklist[pos-1], "right", duration, null, returns.onEndTransition);
           history.pushState({contentarea: selector, link: linklist[pos-1], dir: "right"}, "Swiperight page", linklist[pos-1]);
         }
       }
     });
     
     window.onpopstate = function(data) {
-      returns.onstarttransition(data.state.contentarea, data.state.link, data.state.dir, 800);
-      transitionTo(data.state.contentarea, data.state.link, data.state.dir);
+      returns.onStartTransition(data.state.contentarea, data.state.link, data.state.dir, 800);
+      transitionTo(data.state.contentarea, data.state.link, data.state.dir, null, null, returns.onEndTransition);
     };
   
     return returns;

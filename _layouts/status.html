@@ -4,5 +4,8 @@ layout: default
 
 <div class="status">
   <h1><span class="leftq">“</span>{{content}}<span class="rightq">”</span></h1>
-  <span class="post-date">{{ page.date | date_to_string }}</span>
+  <div class='post-footer'>
+    <div class='left'><div class='share-link' data-link="{{page.url}}"></div></div>
+    <a href="{{ page.url }}"><span class="post-date">{{ page.date | date_to_string }}</span></a>
+  </div>
 </div>
