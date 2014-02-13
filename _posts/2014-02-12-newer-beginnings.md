@@ -2,7 +2,7 @@
 layout: post
 title: Newer Beginnings
 author: Wesley Wigham
----
+--- 
 
 Here I am again, wiping away an old post to replace it with something new. This time, it's for something worthwhile, though! Here's what's powering this site _right now:_
 
@@ -18,9 +18,11 @@ Lanyon is a minimalist theme for a Jekyll site. Sporting a collapsed sidebar, a 
 
 ###Sideswipe
 Sideswipe is a tool of my own invention. It relies heavily upon [Hammer.js](http://eightmedia.github.io/hammer.js/) for touch events, and jQuery for some DOM manipulation. I include the sideswipe javascript file in the site, then activate it with:
+
 ```js
 var Swipe = sideswipe(".content", ["/", "/blog/", "/about/"]);
 ```
+
 This tells sideswipe to listen for `swipeleft` and `swiperight` events on the site's `/`, `/blog/`, and `/about/` paths. When it gets one, it transitions the section of the page given by the `.content` selector to the next one, as given by the order of the paths in the array.
 
 Here's an example. Say you're on `/blog/` (as you are now). If you `swipeleft` the content area of this page will slide out to the left, and the content area of `/about/` will slide in from the right. If you `swiperight`, the content area will slide out to the right, and the root page content area will slide in from the left. 
