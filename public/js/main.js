@@ -47,6 +47,7 @@ $(document).ready(function () {
     }
   };
   
+  /* //Not ready yet!
   $("body").append("<div class='leftarrow pagearrow'>L</div>");
   $("body").append("<div class='rightarrow pagearrow'>R</div>");
   
@@ -57,6 +58,6 @@ $(document).ready(function () {
   $(".rightarrow").on('click', function() {
     swipe.left();
   });
-  
+  */
 });
 

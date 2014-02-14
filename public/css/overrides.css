@@ -12,6 +12,7 @@
 .status .leftq {
   font-size: 6em;
   transform: rotate(30deg);
+  -webkit-transform: rotate(30deg);
   display: inline-block;
   position: absolute;
   margin-top: -0.4em;
@@ -20,11 +21,13 @@
   left: 0;
   color: rgba(172, 65, 66, 0.8);
   z-index: 100;
+  pointer-events: none;
 }
 
 .status .rightq {
   font-size: 6em;
   transform: scaleX(-1) rotate(150deg);
+  -webkit-transform: scaleX(-1) rotate(150deg);
   display: inline-block;
   position: absolute;
   margin-bottom: -0.4em;
@@ -33,7 +36,7 @@
   right: 0;
   color: rgba(172, 65, 66, 0.8);
   z-index: -100;
-  
+  pointer-events: none;
 }
 
 .status .post-date {
@@ -76,6 +79,7 @@
   top: 50%;
   width: 1em;
   transition: color 0.1s ease-in-out 0.05s;
+  -webkit-transition: color 0.1s ease-in-out 0.05s;
 }
 
 #sidebar-checkbox:checked ~ .leftarrow {
@@ -89,6 +93,7 @@
 .leftarrow {
   left: 0em;
   transition: left 0.3s ease-in-out;
+  -webkit-transition: left 0.3s ease-in-out;
 }
 
 .rightarrow {
