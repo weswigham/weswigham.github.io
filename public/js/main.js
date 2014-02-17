@@ -10,6 +10,7 @@ function qualifyURL( url ){
   return url;
 }
 
+var swipe = null;
 
 function shareify() {
   $('.share-link').each(function(n) {
@@ -18,14 +19,30 @@ function shareify() {
       url: url
     });
   });
+  
+  $(".leftmove").each(function () {
+    if (!this.activated) {
+      $(this).on('click', function() {
+        swipe.right();
+      });
+      this.activated = true;
+    }
+  });
+  
+  $(".rightmove").each(function () {
+    if (!this.activated) {
+      $(this).on('click', function() {
+        swipe.left();
+      });
+      this.activated = true;
+    }
+  });
 }
 
 $(document).ready(function () {
   'use strict';
   
-  shareify();
-  
-  var swipe = Sideswipe(".content", ["/", "/blog/", "/about/"]);
+  swipe = Sideswipe(".content", ["/", "/blog/", "/about/"]);
   swipe.onStartTransition = function(selector, url, direction, duration) {
     $(".sidebar-nav-item").removeClass("active");
     $(".sidebar-nav-item").filter(function() {
@@ -47,17 +64,10 @@ $(document).ready(function () {
     }
   };
   
-  /* //Not ready yet!
-  $("body").append("<div class='leftarrow pagearrow'>L</div>");
-  $("body").append("<div class='rightarrow pagearrow'>R</div>");
   
-  $(".leftarrow").on('click', function() {
-    swipe.right();
-  });
+  $("body").append("<div class='leftmove leftarrow pagearrow'></div>");
+  $("body").append("<div class='rightmove rightarrow pagearrow'></div>");
   
-  $(".rightarrow").on('click', function() {
-    swipe.left();
-  });
-  */
+  shareify();
 });
 
