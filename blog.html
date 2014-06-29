@@ -7,7 +7,7 @@ layout: default
     {% case post.layout %}
     {% when "status" %}
       <div class="status">
-        <h1><span class="leftq">“</span>{{post.content}}<span class="rightq">”</span></h1>
+        <h1 class="status-content">{{post.content}}</h1>
         <div class='post-footer'>
           <div class='left'><div class='share-link' data-link="{{post.url}}"></div></div>
           <a href="{{ post.url }}"><span class="post-date">{{ post.date | date_to_string }}</span></a>
