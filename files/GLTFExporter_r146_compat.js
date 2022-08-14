@@ -499,7 +499,7 @@
 
 		serializeUserData( object, objectDef ) {
 
-			if ( Object.keys( object.userData ).length === 0 ) return;
+			if ( Object.keys( (object || {}).userData || {} ).length === 0 ) return;
 			const options = this.options;
 			const extensionsUsed = this.extensionsUsed;
 
